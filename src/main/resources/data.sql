@@ -1,0 +1,52 @@
+DROP TABLE IF EXISTS user;
+CREATE TABLE user (
+    id INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY
+    email VARCHAR(100) NOT NULL UNIQUE
+    password VARCHAR(100) NOT NULL
+    first_name VARCHAR(100) NOT NULL
+    last_name VARCHAR(100) NOT NULL
+    birthdate DATE NOT NULL
+    balance FLOAT
+);
+
+DROP TABLE IF EXISTS bank_account;
+CREATE TABLE bank_account (
+    id INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY
+    iban VARCHAR(100) NOT NULL
+    bic VARCHAR(100) NOT NULL
+    name VARCHAR(100) NOT NULL
+    user_id INTEGER NOT NULL
+    FOREIGN KEY (user_id) REFERENCES user (id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+DROP TABLE IF EXISTS bank_transaction;
+CREATE TABLE bank_transaction (
+    id INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY
+    type VARCHAR(50) NOT NULL
+    amount_before_fees FLOAT NOT NULL
+    fees FLOAT NOT NULL
+    final_amount FLOAT NOT NULL
+    date DATE NOT NULL
+    bank_account_id INTEGER NOT NULL
+    FOREIGN KEY (bank_account_id) REFERENCES bank_account (id) ON DELETE NO ACTION ON UPDATE NO ACTION
+);
+
+DROP TABLE IF EXISTS connection;
+CREATE TABLE connection (
+    id INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY
+    user_id INTEGER NOT NULL
+    buddy_id INTEGER NOT NULL
+    FOREIGN KEY (user_id) REFERENCES user (id) ON DELETE NO ACTION ON UPDATE NO ACTION
+    FOREIGN KEY (buddy_id) REFERENCES user (id) ON DELETE NO ACTION ON UPDATE NO ACTION
+);
+
+DROP TABLE IF EXISTS buddy_transaction;
+CREATE TABLE buddy_transaction (
+    id INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY
+    amount_before_fees FLOAT NOT NULL
+    fees FLOAT NOT NULL
+    final_amount FLOAT NOT NULL
+    date DATE NOT NULL
+    connection_id INTEGER NOT NULL
+    FOREIGN KEY (connection_id) REFERENCES connection (id) ON DELETE NO ACTION ON UPDATE NO ACTION
+);
