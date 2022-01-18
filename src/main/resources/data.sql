@@ -1,52 +1,26 @@
-DROP TABLE IF EXISTS user;
-CREATE TABLE user (
-    id INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY
-    email VARCHAR(100) NOT NULL UNIQUE
-    password VARCHAR(100) NOT NULL
-    first_name VARCHAR(100) NOT NULL
-    last_name VARCHAR(100) NOT NULL
-    birthdate DATE NOT NULL
-    balance FLOAT
-);
+INSERT INTO user (email, password, first_name, last_name, balance)
+VALUES
+('dancarter@email.com', 'danythebest10', 'Dan', 'Carter', 50),
+('jonnywilkinson@email.com', 'worldchampion2003', 'Jonny', 'Wilkinson', 40),
+('quadecooper@email.com', 'crochetdudiable', 'Quade', 'Cooper', 70),
+('romainntk@email.com', 'talent1999', 'Romain', 'Ntamack', 100),
+('finnrussell@email.com', 'touriste92', 'Finn', 'Russell', 80);
 
-DROP TABLE IF EXISTS bank_account;
-CREATE TABLE bank_account (
-    id INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY
-    iban VARCHAR(100) NOT NULL
-    bic VARCHAR(100) NOT NULL
-    name VARCHAR(100) NOT NULL
-    user_id INTEGER NOT NULL
-    FOREIGN KEY (user_id) REFERENCES user (id) ON DELETE CASCADE ON UPDATE CASCADE
-);
+INSERT INTO bank_account (iban, bic, name, user_id)
+VALUES
+('FR99111222333444555', 'AGRI0099', 'CA', 1),
+('FR99000999888777666', 'CMC8899', 'CM', 4);
 
-DROP TABLE IF EXISTS bank_transaction;
-CREATE TABLE bank_transaction (
-    id INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY
-    type VARCHAR(50) NOT NULL
-    amount_before_fees FLOAT NOT NULL
-    fees FLOAT NOT NULL
-    final_amount FLOAT NOT NULL
-    date DATE NOT NULL
-    bank_account_id INTEGER NOT NULL
-    FOREIGN KEY (bank_account_id) REFERENCES bank_account (id) ON DELETE NO ACTION ON UPDATE NO ACTION
-);
+INSERT INTO connection (user_id, buddy_id)
+VALUES
+(1,2),
+(4,1),
+(5,3),
+(2,4);
 
-DROP TABLE IF EXISTS connection;
-CREATE TABLE connection (
-    id INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY
-    user_id INTEGER NOT NULL
-    buddy_id INTEGER NOT NULL
-    FOREIGN KEY (user_id) REFERENCES user (id) ON DELETE NO ACTION ON UPDATE NO ACTION
-    FOREIGN KEY (buddy_id) REFERENCES user (id) ON DELETE NO ACTION ON UPDATE NO ACTION
-);
-
-DROP TABLE IF EXISTS buddy_transaction;
-CREATE TABLE buddy_transaction (
-    id INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY
-    amount_before_fees FLOAT NOT NULL
-    fees FLOAT NOT NULL
-    final_amount FLOAT NOT NULL
-    date DATE NOT NULL
-    connection_id INTEGER NOT NULL
-    FOREIGN KEY (connection_id) REFERENCES connection (id) ON DELETE NO ACTION ON UPDATE NO ACTION
-);
+INSERT INTO buddy_transaction (amount_before_fees, fees, final_amount, date, connection_id)
+VALUES
+(20, 0.1, 20.1, CURRENT_DATE, 1),
+(30, 0.15, 30.15, CURRENT_DATE, 2),
+(60, 0.3, 60.3, CURRENT_DATE, 3),
+(50, 0.25, 50.25, CURRENT_DATE, 4);
