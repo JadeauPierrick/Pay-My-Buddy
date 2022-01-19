@@ -45,6 +45,7 @@ CREATE TABLE buddy_transaction (
     amount_before_fees FLOAT NOT NULL
     fees FLOAT NOT NULL
     final_amount FLOAT NOT NULL
+    description VARCHAR(100) NOT NULL
     date DATE NOT NULL
     connection_id INTEGER NOT NULL
     FOREIGN KEY (connection_id) REFERENCES connection (id) ON DELETE NO ACTION ON UPDATE NO ACTION

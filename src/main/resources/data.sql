@@ -18,9 +18,9 @@ VALUES
 (5,3),
 (2,4);
 
-INSERT INTO buddy_transaction (amount_before_fees, fees, final_amount, date, connection_id)
+INSERT INTO buddy_transaction (amount_before_fees, fees, final_amount, description, date, connection_id)
 VALUES
-(20, 0.1, 20.1, CURRENT_DATE, 1),
-(30, 0.15, 30.15, CURRENT_DATE, 2),
-(60, 0.3, 60.3, CURRENT_DATE, 3),
-(50, 0.25, 50.25, CURRENT_DATE, 4);
+(20, 0.1, 20.1, 'train ticket', CURRENT_DATE, 1),
+(30, 0.15, 30.15, 'restaurant', CURRENT_DATE, 2),
+(60, 0.3, 60.3, 'Melbourne trip', CURRENT_DATE, 3),
+(50, 0.25, 50.25, 'parking ticket', CURRENT_DATE, 4);
