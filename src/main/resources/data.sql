@@ -4,9 +4,10 @@ VALUES
 ('jonnywilkinson@email.com', 'worldchampion2003', 'Jonny', 'Wilkinson', 40),
 ('quadecooper@email.com', 'crochetdudiable', 'Quade', 'Cooper', 70),
 ('romainntk@email.com', 'talent1999', 'Romain', 'Ntamack', 100),
-('finnrussell@email.com', 'touriste92', 'Finn', 'Russell', 80);
+('finnrussell@email.com', 'touriste92', 'Finn', 'Russell', 80),
+('admin@email.com', 'jaitouslespouvoirsPMB', 'admin', 'admin', 0);
 
-INSERT INTO bank_account (iban, bic, name, user_id)
+INSERT INTO bank_account (iban, bic, name, user_email)
 VALUES
 ('FR99111222333444555', 'AGRI0099', 'CA', 1),
 ('FR99000999888777666', 'CMC8899', 'CM', 4);
