@@ -1,15 +1,18 @@
 package com.paymybuddy.application.model;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
+@NoArgsConstructor
 @Entity
 @DynamicUpdate
 @Table(name = "user")
@@ -35,8 +38,7 @@ public class User implements Serializable {
     @Column(name = "last_name", length = 100)
     private String lastName;
 
-    @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "account_id")
+    @OneToOne(mappedBy = "user")
     private Account account;
 
     @ManyToMany
@@ -47,6 +49,16 @@ public class User implements Serializable {
     )
     private List<User> connections;
 
-    public User() {
+    public User(String email, String password, String firstName, String lastName) {
+        this.email = email;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.connections = new ArrayList<>();
+    }
+
+    public void addAccount(Account userAccount){
+        this.account = userAccount;
+        userAccount.setUser(this);
     }
 }

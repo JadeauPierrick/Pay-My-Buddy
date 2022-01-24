@@ -24,11 +24,6 @@ public class AccountServiceImpl implements AccountService{
     }
 
     @Override
-    public Account addAccount(Account account){
-        return accountRepository.save(account);
-    }
-
-    @Override
     public void deleteAccountById(Integer id){
         accountRepository.deleteById(id);
     }

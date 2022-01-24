@@ -10,7 +10,5 @@ public interface AccountService {
 
     public Optional<Account> getAccountById(Integer id);
 
-    public Account addAccount(Account account);
-
     public void deleteAccountById(Integer id);
 }

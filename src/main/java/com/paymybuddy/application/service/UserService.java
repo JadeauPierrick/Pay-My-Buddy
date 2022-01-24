@@ -8,9 +8,11 @@ public interface UserService {
 
     public Iterable<User> getUsers();
 
-    public Optional<User> getUserById(Integer id);
+    public User getUserById(Integer id) throws Exception;
 
-    public User addUser(User user);
+    public User getUserByEmail(String email) throws Exception;
+
+    public User addUser(User user) throws Exception;
 
     public void deleteUserById(Integer id);
 }

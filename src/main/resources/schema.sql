@@ -11,8 +11,6 @@ CREATE TABLE user (
     password VARCHAR(100) NOT NULL,
     first_name VARCHAR(100) NOT NULL,
     last_name VARCHAR(100) NOT NULL
-    account_id INTEGER NOT NULL
-    FOREIGN KEY (account_id) REFERENCES account (id)
 );
 
 DROP TABLE IF EXISTS connection;
@@ -27,17 +25,19 @@ CREATE TABLE connection (
 DROP TABLE IF EXISTS account;
 CREATE TABLE account (
     id INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    balance FLOAT
+    balance FLOAT,
+    user_id INTEGER NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES user (id)
 );
 
 DROP TABLE IF EXISTS transaction;
 CREATE TABLE transaction (
     id INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    date DATE NULL DEFAULT CURRENT_DATE,
+    date DATETIME DEFAULT CURRENT_TIMESTAMP,
     type VARCHAR(50) NOT NULL,
     amount FLOAT NOT NULL,
     description VARCHAR(250) NOT NULL,
     fees FLOAT NOT NULL,
-    account_id INTEGER NOT NULL
+    account_id INTEGER NOT NULL,
     connection_id INTEGER DEFAULT NULL
-)
+);
