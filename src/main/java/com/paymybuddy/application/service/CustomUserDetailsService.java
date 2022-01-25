@@ -10,7 +10,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -24,14 +23,10 @@ public class CustomUserDetailsService implements UserDetailsService {
         Optional<User> user = userRepository.findByEmail(email);
 
         if (user.isPresent()){
-            return new org.springframework.security.core.userdetails.User(user.get().getEmail(), user.get().getPassword(), new ArrayList<GrantedAuthority>());
+            return new org.springframework.security.core.userdetails
+                    .User(user.get().getEmail(), user.get().getPassword(), new ArrayList<GrantedAuthority>());
         }else {
             throw new UsernameNotFoundException("User with " + email + ", not found!");
         }
-    }
-
-    public List<GrantedAuthority> getGrantedAuthorities(User user){
-        List<GrantedAuthority> authorities = new ArrayList<>();
-        return authorities;
     }
 }
