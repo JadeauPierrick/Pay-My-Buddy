@@ -8,6 +8,11 @@ public class LoginController {
 
     @GetMapping("/login")
     public String getUser(){
+        return "Hello";
+    }
+
+    @GetMapping("/home")
+    public String homePage(){
         return "Welcome";
     }
 }

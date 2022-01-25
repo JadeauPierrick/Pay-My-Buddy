@@ -33,8 +33,9 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/logout").permitAll()
                 .antMatchers("/home").authenticated()
                 .and()
-                .formLogin();
-               // .loginPage("/login").defaultSuccessUrl("/home", true)
+                .formLogin()
+               //.loginPage("/login")
+                .defaultSuccessUrl("/home", true);
                // .and()
               //  .logout().logoutUrl("/logout").logoutSuccessUrl("/login")
     }
