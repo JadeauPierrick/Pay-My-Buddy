@@ -34,7 +34,7 @@ public class TransactionController {
         User user = userService.getUserByEmail(authentication.getName());
         List<User> buddies = user.getConnections().stream().map(Connection::getBuddy).collect(Collectors.toList());
 
-        Page<Transaction> transactionsList = transactionService.getTransactionsByOriginalAccount(user.getAccount().getId(), PageRequest.of(page, 4, Sort.by(Sort.Order.desc("date"))));
+        Page<Transaction> transactionsList = transactionService.getTransactionsByOriginalAccountId(user.getAccount().getId(), PageRequest.of(page, 4, Sort.by(Sort.Order.desc("date"))));
 
         model.addAttribute("transactions", transactionsList);
         model.addAttribute("buddies", buddies);

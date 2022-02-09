@@ -13,10 +13,8 @@ import java.util.List;
 @Repository
 public interface TransactionRepository extends CrudRepository<Transaction, Integer> {
 
-    public Page<Transaction> findByOriginalAccount(int id, Pageable pageable);
+    public Page<Transaction> findByOriginalAccountId(int id, Pageable pageable);
 
     @Query(nativeQuery = true, value = "SELECT * FROM transaction WHERE account_id LIKE :id")
     public Page<Transaction> findByOriAccountId(@Param("id") int id, Pageable pageable);
-
-    public List<Transaction> findByOriginalAccountId(int id);
 }

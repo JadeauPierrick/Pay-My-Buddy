@@ -27,13 +27,8 @@ public class TransactionServiceImpl implements TransactionService{
     }
 
     @Override
-    public List<Transaction> getTransactionsByOriginalAccountId(int id){
-        return transactionRepository.findByOriginalAccountId(id);
-    }
-
-    @Override
-    public Page<Transaction> getTransactionsByOriginalAccount(Integer id, PageRequest pageRequest){
-        return transactionRepository.findByOriginalAccount(id, pageRequest);
+    public Page<Transaction> getTransactionsByOriginalAccountId(Integer id, PageRequest pageRequest){
+        return transactionRepository.findByOriginalAccountId(id, pageRequest);
     }
 
     @Override

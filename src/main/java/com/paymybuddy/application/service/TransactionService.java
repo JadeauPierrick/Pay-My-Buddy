@@ -13,9 +13,7 @@ public interface TransactionService {
 
     public Optional<Transaction> getTransactionById(Integer id);
 
-    public List<Transaction> getTransactionsByOriginalAccountId(int id);
-
-    public Page<Transaction> getTransactionsByOriginalAccount(Integer id, PageRequest pageRequest);
+    public Page<Transaction> getTransactionsByOriginalAccountId(Integer id, PageRequest pageRequest);
 
     public Page<Transaction> getTransactionsByOriAccountId(Integer id, PageRequest pageRequest);
 
