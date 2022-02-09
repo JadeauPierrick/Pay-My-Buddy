@@ -23,8 +23,6 @@ public class UserServiceImpl implements UserService{
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    private PasswordCallback userEntity;
-
     @Override
     public Iterable<User> getUsers(){
         return userRepository.findAll();

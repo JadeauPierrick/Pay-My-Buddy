@@ -41,13 +41,8 @@ public class User implements Serializable {
     @OneToOne(mappedBy = "user")
     private Account account;
 
-    @ManyToMany
-    @JoinTable(
-            name = "connection",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "buddy_id")
-    )
-    private List<User> connections;
+    @OneToMany(mappedBy = "user")
+    private List<Connection> connections;
 
     public User(String email, String password, String firstName, String lastName) {
         this.email = email;
@@ -60,5 +55,10 @@ public class User implements Serializable {
     public void addAccount(Account userAccount){
         this.account = userAccount;
         userAccount.setUser(this);
+    }
+
+    public void addConnection(Connection connection){
+        this.connections.add(connection);
+        connection.setUser(this);
     }
 }

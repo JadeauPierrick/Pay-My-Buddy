@@ -15,8 +15,8 @@ VALUES
 INSERT INTO connection (user_id, buddy_id)
 VALUES
 (1,2),
-(4,1),
-(5,3),
+(1,3),
+(1,4),
 (2,4);
 
 INSERT INTO account (balance, user_id)
@@ -26,3 +26,7 @@ VALUES
 (100, 3),
 (100, 4),
 (100, 5);
+
+INSERT INTO transaction (type, amount, fees, description, account_id, buddy_account_id)
+VALUES
+('TRANSFER_RECEIVE', 50, 0.25, 'Restaurant', 1, 2);

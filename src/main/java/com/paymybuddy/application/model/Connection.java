@@ -1,11 +1,13 @@
 package com.paymybuddy.application.model;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 
 @Data
+@NoArgsConstructor
 @Entity
 @DynamicUpdate
 @Table(name = "connection")
@@ -15,9 +17,11 @@ public class Connection {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "user_email")
-    private String userEmail;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
-    @Column(name = "buddy_email")
-    private String buddyEmail;
+    @ManyToOne
+    @JoinColumn(name = "buddy_id")
+    private User buddy;
 }

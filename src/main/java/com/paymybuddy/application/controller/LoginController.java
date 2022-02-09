@@ -1,18 +1,13 @@
 package com.paymybuddy.application.controller;
 
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
 
-@RestController
+@Controller
 public class LoginController {
 
     @GetMapping("/login")
-    public String getUser(){
-        return "Hello";
-    }
-
-    @GetMapping("/home")
-    public String homePage(){
-        return "Welcome";
+    public String getLogin(){
+        return "login";
     }
 }

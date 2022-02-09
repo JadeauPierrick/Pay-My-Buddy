@@ -34,10 +34,12 @@ DROP TABLE IF EXISTS transaction;
 CREATE TABLE transaction (
     id INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
     date DATETIME DEFAULT CURRENT_TIMESTAMP,
-    type VARCHAR(50) NOT NULL,
+    type ENUM('BANK_DEPOSIT', 'BANK_WITHDRAWAL', 'TRANSFER_RECEIVE', 'TRANSFER_SENT') NOT NULL,
     amount FLOAT NOT NULL,
-    description VARCHAR(250) NOT NULL,
     fees FLOAT NOT NULL,
+    description VARCHAR(250) NOT NULL,
     account_id INTEGER NOT NULL,
-    connection_id INTEGER DEFAULT NULL
+    buddy_account_id INTEGER DEFAULT NULL,
+    FOREIGN KEY (account_id) REFERENCES account (id),
+    FOREIGN KEY (buddy_account_id) REFERENCES account (id)
 );

@@ -1,6 +1,8 @@
 package com.paymybuddy.application.model;
 
+import com.paymybuddy.application.constants.TransactionType;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
@@ -9,9 +11,8 @@ import java.io.Serializable;
 import java.util.Date;
 
 @Data
+@NoArgsConstructor
 @Entity
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "type", discriminatorType = DiscriminatorType.STRING, length = 50)
 @DynamicUpdate
 public class Transaction implements Serializable {
 
@@ -21,13 +22,24 @@ public class Transaction implements Serializable {
 
     private Date date;
 
+    @Column(name = "type")
+    @Enumerated(EnumType.STRING)
+    private TransactionType transactionType;
+
     @NotNull(message = "The amount is required")
     @Column(length = 20)
     private float amount;
 
+    private float fees;
+
     @NotNull(message = "The description is required")
-    @Column(length = 250)
     private String description;
 
-    private float fees;
+    @ManyToOne
+    @JoinColumn(name = "account_id")
+    private Account originalAccount;
+
+    @Column(name = "buddy_account_id")
+    private Account buddyAccount;
+
 }

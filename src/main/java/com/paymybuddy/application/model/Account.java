@@ -25,8 +25,7 @@ public class Account implements Serializable {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @OneToMany(fetch = FetchType.EAGER)
-    @JoinColumn(name = "account_id")
+    @OneToMany(mappedBy = "originalAccount")
     private List<Transaction> transactions;
 
     public Account(float balance) {
