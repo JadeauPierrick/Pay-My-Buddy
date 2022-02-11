@@ -5,13 +5,14 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Data
 @NoArgsConstructor
 @Entity
 @DynamicUpdate
 @Table(name = "connection")
-public class Connection {
+public class Connection implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

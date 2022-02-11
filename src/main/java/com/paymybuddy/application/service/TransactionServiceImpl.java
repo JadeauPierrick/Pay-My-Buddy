@@ -17,7 +17,7 @@ public class TransactionServiceImpl implements TransactionService{
     private TransactionRepository transactionRepository;
 
     @Override
-    public Iterable<Transaction> getTransactions(){
+    public List<Transaction> getTransactions(){
         return transactionRepository.findAll();
     }
 
@@ -26,14 +26,8 @@ public class TransactionServiceImpl implements TransactionService{
         return transactionRepository.findById(id);
     }
 
-    @Override
-    public Page<Transaction> getTransactionsByOriginalAccountId(Integer id, PageRequest pageRequest){
+    public Page<Transaction> getTransactionsByAccountOriginalId(Integer id, PageRequest pageRequest){
         return transactionRepository.findByOriginalAccountId(id, pageRequest);
-    }
-
-    @Override
-    public Page<Transaction> getTransactionsByOriAccountId(Integer id, PageRequest pageRequest){
-        return transactionRepository.findByOriAccountId(id, pageRequest);
     }
 
     @Override

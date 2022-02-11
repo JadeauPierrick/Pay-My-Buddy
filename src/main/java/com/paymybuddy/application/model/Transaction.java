@@ -3,24 +3,27 @@ package com.paymybuddy.application.model;
 import com.paymybuddy.application.constants.TransactionType;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.sql.Timestamp;
 import java.util.Date;
 
 @Data
 @NoArgsConstructor
 @Entity
 @DynamicUpdate
+@Table(name = "transaction")
 public class Transaction implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    private Date date;
+    private Timestamp date;
 
     @Column(name = "type")
     @Enumerated(EnumType.STRING)
@@ -35,11 +38,12 @@ public class Transaction implements Serializable {
     @NotNull(message = "The description is required")
     private String description;
 
+    @ToString.Exclude
     @ManyToOne
     @JoinColumn(name = "account_id")
     private Account originalAccount;
 
     @Column(name = "buddy_account_id")
-    private Account buddyAccount;
+    private int buddyAccount;
 
 }

@@ -5,6 +5,7 @@ import com.paymybuddy.application.repository.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -14,7 +15,7 @@ public class AccountServiceImpl implements AccountService{
     private AccountRepository accountRepository;
 
     @Override
-    public Iterable<Account> getAccounts(){
+    public List<Account> getAccounts(){
         return accountRepository.findAll();
     }
 

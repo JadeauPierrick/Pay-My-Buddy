@@ -30,13 +30,14 @@ public class TransactionController {
     private TransactionService transactionService;
 
     @GetMapping(value = "/transfer")
-    public String transferPage(Authentication authentication, @RequestParam(defaultValue = "0") int page, Model model) throws Exception {
+    public String transferPage(Authentication authentication, @RequestParam(name = "page", defaultValue = "0") int page, @RequestParam(name="size", defaultValue = "4") int size, Model model) throws Exception {
         User user = userService.getUserByEmail(authentication.getName());
         List<User> buddies = user.getConnections().stream().map(Connection::getBuddy).collect(Collectors.toList());
 
-        Page<Transaction> transactionsList = transactionService.getTransactionsByOriginalAccountId(user.getAccount().getId(), PageRequest.of(page, 4, Sort.by(Sort.Order.desc("date"))));
+        Page<Transaction> transactions = transactionService.getTransactionsByAccountOriginalId(user.getAccount().getId(), PageRequest.of(page, size, Sort.by("date").descending()));
 
-        model.addAttribute("transactions", transactionsList);
+        model.addAttribute("transactions", transactions);
+        model.addAttribute("currentPage", page);
         model.addAttribute("buddies", buddies);
         return "transfer";
     }

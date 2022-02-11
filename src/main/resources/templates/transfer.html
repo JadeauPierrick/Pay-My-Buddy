@@ -115,9 +115,9 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr th:each="transaction : ${transactions}">
+                        <tr th:each="transaction : ${transactions.content}">
                             <td th:text="${transaction.date}"></td>
-                            <td th:text="${transaction.type}"></td>
+                            <td th:text="${transaction.transactionType}"></td>
                             <td th:text="${transaction.buddyAccount}"></td>
                             <td th:text="${transaction.amount}"></td>
                             <td th:text="${transaction.description}"></td>
@@ -126,8 +126,8 @@
                 </table>
                 <hr/>
                 <ul class="nav nav-pills">
-                    <li class="nav-item" th:each="i : ${#numbers.sequence(0,transactions.totalPage-1)}">
-                        <a th:text="${i}" class="nav-link"></a>
+                    <li class="nav-item" th:each="i : ${#numbers.sequence(0,transactions.totalPages-1)}">
+                        <a th:href="@{/transfer(page=${i}, size=${transactions.size})}" th:text="${i}" th:classappend="${currentPage}==${i}?'active':''" class="nav-link"></a>
                     </li>
                 </ul>
             </div>

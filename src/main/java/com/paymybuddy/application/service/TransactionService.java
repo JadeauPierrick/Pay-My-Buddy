@@ -9,13 +9,11 @@ import java.util.Optional;
 
 public interface TransactionService {
 
-    public Iterable<Transaction> getTransactions();
+    public List<Transaction> getTransactions();
 
     public Optional<Transaction> getTransactionById(Integer id);
 
-    public Page<Transaction> getTransactionsByOriginalAccountId(Integer id, PageRequest pageRequest);
-
-    public Page<Transaction> getTransactionsByOriAccountId(Integer id, PageRequest pageRequest);
+    public Page<Transaction> getTransactionsByAccountOriginalId(Integer id, PageRequest pageRequest);
 
     public Transaction addTransaction(Transaction transaction);
 

@@ -2,6 +2,7 @@ package com.paymybuddy.application.model;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
@@ -13,6 +14,7 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 @DynamicUpdate
+@Table(name = "account")
 public class Account implements Serializable {
 
     @Id
@@ -21,6 +23,7 @@ public class Account implements Serializable {
 
     private float balance;
 
+    @ToString.Exclude
     @OneToOne
     @JoinColumn(name = "user_id")
     private User user;

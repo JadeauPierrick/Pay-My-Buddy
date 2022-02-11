@@ -2,11 +2,12 @@ package com.paymybuddy.application.service;
 
 import com.paymybuddy.application.model.Connection;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface ConnectionService {
 
-    public Iterable<Connection> getConnections();
+    public List<Connection> getConnections();
 
     public Optional<Connection> getConnectionById(Integer id);
 
