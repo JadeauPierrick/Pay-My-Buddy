@@ -10,7 +10,6 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.sql.Timestamp;
-import java.util.Date;
 
 @Data
 @NoArgsConstructor
@@ -43,7 +42,8 @@ public class Transaction implements Serializable {
     @JoinColumn(name = "account_id")
     private Account originalAccount;
 
-    @Column(name = "buddy_account_id")
-    private int buddyAccount;
+    @ManyToOne
+    @JoinColumn(name = "buddy_account_id")
+    private Account buddyAccount;
 
 }

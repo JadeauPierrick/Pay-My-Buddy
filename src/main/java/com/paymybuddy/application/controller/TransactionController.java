@@ -45,6 +45,6 @@ public class TransactionController {
     @PostMapping(value = "/transfer/new")
     public String newTransfer(Authentication authentication, @ModelAttribute("newTransaction") String transactionType, Model model) throws Exception {
         User user = userService.getUserByEmail(authentication.getName());
-        return "redirect/transfer";
+        return "redirect:/transfer";
     }
 }

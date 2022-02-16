@@ -3,9 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous"/>
     <title>Transfer page</title>
 </head>
 <body>
@@ -25,77 +23,85 @@
         <div class="card-header">
             <ul class="nav nav-tabs card-header-tabs">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="true" href="#">Make An Operation</a>
+                    <a class="nav-link active" aria-current="true" href="#">Send Money</a>
                 </li>
-                <form class="d-flex">
-                    <div class="newConnection">
-                        <button type="button" class="btn btn-primary float-right mb-4" onclick="document.getElementById('connection').style.display='block'">Add Connection</button>
-                    </div>
-                    <div id="connection" style="display: none;">
-                        <form class="form-group" th:action="@{/connection}" method="post">
-                            <div class="row mb-2">
-                                <div class="col-md-8">
-                                    <input type="hidden" name="user" id="user">
-                                    <div>
-                                        <label for="buddyEmail">Connect To</label>
-                                        <input class="form-control" type="email" id="buddyEmail" name="buddyEmail" required>
-                                    </div>
-                                </div>
-                                <div class="col-md-4 pl-2" style="margin-top: 2em;">
-                                    <button type="submit" class="btn btn-primary" value="saveConnection">Add</button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </form>
+                <li class="nav-item">
+                    <button type="button" class="btn btn-primary" style="margin-left: 32em;" data-bs-toggle="modal" data-bs-target="#exampleModal">Add Connection</button>
+                </li>
             </ul>
         </div>
-        <div class="card-body">
-            <div class="newTransaction" id="transfer" style="display: block;background-color: #eeeeee;margin-top: 3em;padding:1em;">
-                <form class="form-group" th:action="@{/transfer/new}" method="post">
-                    <div class="row mb-2">
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" onchange="document.getElementById('buddyTransfer').style.display='none'" value="option1" checked>
-                            <label class="form-check-label" for="exampleRadios1">
-                                Deposit
-                            </label>
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <form th:action="@{/connection}" method="post">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">New Buddy</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" onchange="document.getElementById('buddyTransfer').style.display='none'" value="option2">
-                            <label class="form-check-label" for="exampleRadios2">
-                                Withdrawal
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios3" onchange="document.getElementById('buddyTransfer').style.display='block'" value="option3">
-                            <label class="form-check-label" for="exampleRadios3">
-                                Transfer
-                            </label>
-                        </div>
-                        <div id="buddyTransfer" class="col-md-4" style="display: none">
-                            <select id="buddy" name="buddy"  class="form-select" required>
-                                <option value="">Select A Connection</option>
-                                <option th:each="buddy : ${buddies}" th:value="${buddy.email}" th:text="${buddy.firstName}">Email</option>
-                            </select>
-                        </div>
-                        <div class="col-md-2">
-                            <label for="amount" class="form-label">Amount</label>
-                            <div class="input-group has-validation">
-                                <input type="number" min="1" value="0" step=".01" name="amount" id="amount" class="form-control" aria-describedby="inputGroupPrepend" required>
-                                <span class="input-group-text" id="inputGroupPrepend">€</span>
-                                <div class="invalid-feedback">
-                                    Please choose a username.
-                                </div>
+                        <div class="modal-body">
+                            <div class="mb-3">
+                                <label for="buddyMail" class="col-form-label">Email:</label>
+                                <input type="email" class="form-control" id="buddyMail" name="buddyMail" value="" required/>
                             </div>
                         </div>
-                        <div class="col-md-4">
-                            <label for="description">Description: </label>
-                            <input class="form-control" type="text" name="description" id="description" required>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <input type="submit" class="btn btn-primary" value="Save"/>
                         </div>
-                        <div class="d-grid gap-2 col-3 mx-auto" style="margin-top: 2em;">
-                            <label for="transfer"></label>
-                            <button type="submit" name="transfer" class="btn btn-success" value="Transfer">Pay</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="card-body">
+            <div class="newTransaction" id="transfer">
+                <form th:action="@{/transfer/new}" method="post">
+                    <fieldset class="row mb-3">
+                        <legend class="col-form-label col-sm-2 pt-0">Type</legend>
+                        <div class="col-sm-10">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" onchange="document.getElementById('buddyTrans').style.display='none'" checked>
+                                <label class="form-check-label" for="gridRadios1">
+                                    Deposit
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2" onchange="document.getElementById('buddyTrans').style.display='none'">
+                                <label class="form-check-label" for="gridRadios2">
+                                    Withdrawal
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios3" value="option3" onchange="document.getElementById('buddyTrans').style.display='block'">
+                                <label class="form-check-label" for="gridRadios3">
+                                    Transfer
+                                </label>
+                            </div>
+                            <div id="buddyTrans" class="col-md-4" style="display: none">
+                                <select id="friend" name="friend"  class="form-select" required>
+                                    <option value="">Select A Connection</option>
+                                    <option th:each="buddy : ${buddies}" th:value="${buddy.email}" th:text="${buddy.firstName}">Email</option>
+                                </select>
+                            </div>
                         </div>
+                    </fieldset>
+                    <div class="row mb-3">
+                        <label for="amount2" class="col-sm-2 col-form-label">Amount</label>
+                        <div class="col-sm-10">
+                            <div class="input-group has-validation">
+                                <input type="number" min="1" value="0" step=".01" name="amount" id="amount2" class="form-control" aria-describedby="inputGroupPrepend2" required>
+                                <span class="input-group-text" id="inputGroupPrepend2">€</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="description" class="col-sm-2 col-form-label">Description</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="description" name="description" required>
+                        </div>
+                    </div>
+                    <div class="d-grid gap-2 col-3 mx-auto" style="margin-top: 2em;">
+                        <label for="transfer"></label>
+                        <button type="submit" name="transfer" class="btn btn-success" value="Transfer">Pay</button>
                     </div>
                 </form>
             </div>
@@ -105,7 +111,7 @@
         <div class="card">
             <div class="card-block">
                 <table class="table table-hover">
-                    <thead>
+                    <thead class="table-success">
                         <tr>
                             <th>Date</th>
                             <th>Type</th>
@@ -133,5 +139,10 @@
             </div>
         </div>
     </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+    <script type="text/javascript" th:src="@{js/main.js}" src="../static/js/main.js"></script>
 </body>
 </html>
