@@ -7,6 +7,7 @@ import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,7 +22,7 @@ public class Account implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    private float balance;
+    private BigDecimal balance;
 
     @ToString.Exclude
     @OneToOne
@@ -31,7 +32,7 @@ public class Account implements Serializable {
     @OneToMany(mappedBy = "originalAccount")
     private List<Transaction> transactions;
 
-    public Account(float balance) {
+    public Account(BigDecimal balance) {
         this.balance = balance;
         this.transactions = new ArrayList<>();
     }

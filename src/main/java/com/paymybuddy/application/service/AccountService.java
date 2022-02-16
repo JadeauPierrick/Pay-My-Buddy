@@ -12,7 +12,7 @@ public interface AccountService {
 
     public Optional<Account> getAccountById(Integer id);
 
-    public void makeATransfer(Account originalAccount, Account buddyAccount, float amount, String description) throws Exception;
+    public void makeATransfer(Account originalAccount, Account buddyAccount, BigDecimal amount, String description) throws Exception;
 
     public void deleteAccountById(Integer id);
 }

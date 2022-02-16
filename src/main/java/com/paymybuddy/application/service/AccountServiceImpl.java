@@ -8,6 +8,7 @@ import com.paymybuddy.application.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -31,20 +32,8 @@ public class AccountServiceImpl implements AccountService{
     }
 
     @Override
-    public void makeATransfer(Account originalAccount, Account buddyAccount, float amount, String description) throws Exception{
-        if (originalAccount.getBalance() < amount){
-            throw new Exception("Your balance is not enough");
-        }
-        float newBalance = originalAccount.getBalance() - amount;
-        float newBuddyBalance = buddyAccount.getBalance() + amount;
-        originalAccount.setBalance(newBalance);
-        accountRepository.save(originalAccount);
-        buddyAccount.setBalance(newBuddyBalance);
-        accountRepository.save(buddyAccount);
+    public void makeATransfer(Account originalAccount, Account buddyAccount, BigDecimal amount, String description) throws Exception{
 
-        Transaction transaction = new Transaction();
-        transaction.setAmount(amount);
-        transaction.setFees(amount);
     }
 
 

@@ -9,6 +9,7 @@ import org.hibernate.annotations.DynamicUpdate;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.sql.Timestamp;
 
 @Data
@@ -30,9 +31,9 @@ public class Transaction implements Serializable {
 
     @NotNull(message = "The amount is required")
     @Column(length = 20)
-    private float amount;
+    private BigDecimal amount;
 
-    private float fees;
+    private BigDecimal fees;
 
     @NotNull(message = "The description is required")
     private String description;
