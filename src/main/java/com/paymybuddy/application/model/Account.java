@@ -6,6 +6,7 @@ import lombok.ToString;
 import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
+import javax.validation.Valid;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;

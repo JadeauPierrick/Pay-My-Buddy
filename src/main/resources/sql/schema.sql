@@ -38,8 +38,8 @@ CREATE TABLE transaction (
     amount DECIMAL(10,2) NOT NULL,
     fees DECIMAL(10,2) NOT NULL,
     description VARCHAR(250) NOT NULL,
-    account_id INTEGER NOT NULL,
+    original_account_id INTEGER NOT NULL,
     buddy_account_id INTEGER DEFAULT NULL,
-    FOREIGN KEY (account_id) REFERENCES account (id),
+    FOREIGN KEY (original_account_id) REFERENCES account (id),
     FOREIGN KEY (buddy_account_id) REFERENCES account (id)
 );

@@ -8,7 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import javax.security.auth.callback.PasswordCallback;
+import javax.transaction.Transactional;
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -62,6 +63,7 @@ public class UserServiceImpl implements UserService{
             User newUser = userRepository.save(user);
 
             Account account = new Account();
+            account.setBalance(new BigDecimal(0));
 
             newUser.addAccount(account);
             accountRepository.save(account);

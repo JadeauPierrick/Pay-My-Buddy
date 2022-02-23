@@ -40,7 +40,7 @@ public class Transaction implements Serializable {
 
     @ToString.Exclude
     @ManyToOne
-    @JoinColumn(name = "account_id")
+    @JoinColumn(name = "original_account_id")
     private Account originalAccount;
 
     @ManyToOne

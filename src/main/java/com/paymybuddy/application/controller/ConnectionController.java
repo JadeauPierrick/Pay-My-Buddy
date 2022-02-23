@@ -26,8 +26,7 @@ public class ConnectionController {
 
     @RequestMapping(value = "/connection", method = RequestMethod.POST)
     public String addConnection(Authentication authentication, HttpServletRequest request, Model model) throws Exception {
-        String userEmail = authentication.getName();
-        User user = userService.getUserByEmail(userEmail);
+        User user = userService.getUserByEmail(authentication.getName());
 
         try{
             User buddy = userService.getUserByEmail(request.getParameter("buddyMail"));
@@ -39,9 +38,10 @@ public class ConnectionController {
             String success = "Your buddy has been added";
             model.addAttribute("success", success);
         }catch (Exception e){
-            model.addAttribute("error", e);
+            String error = "The user was not found";
+            model.addAttribute("error", error);
         }
 
-        return "redirect:/transfer";
+        return "transfer";
     }
 }
