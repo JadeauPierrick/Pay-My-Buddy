@@ -27,16 +27,18 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
-        httpSecurity.authorizeHttpRequests()
-                .antMatchers("/login").permitAll()
-                .antMatchers("/logout").permitAll()
-                .antMatchers("/home").authenticated()
+        httpSecurity.authorizeRequests()
+                .antMatchers("/signup").permitAll()
+                .anyRequest().authenticated()
                 .and()
                 .formLogin()
-                .loginPage("/login")
-                .defaultSuccessUrl("/home", true)
+                .loginPage("/login").permitAll()
                 .and()
-                .logout().logoutUrl("/logout").logoutSuccessUrl("/login");
+                .logout().permitAll();
+
+        httpSecurity.formLogin().defaultSuccessUrl("/home", true);
+        httpSecurity.logout().logoutUrl("/logout").logoutSuccessUrl("/login");
+
     }
 
     @Bean
