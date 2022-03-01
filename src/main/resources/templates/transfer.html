@@ -9,11 +9,6 @@
 <body>
     <nav th:replace="~{/navbar::fragment}"></nav>
 
-    <div class="alert alert-success" th:if="${success}" th:text="${success}">
-    </div>
-
-    <div class="alert alert-danger" th:if="${error}" th:text="${error}">
-    </div>
     <div class="card mx-auto" style="width: 50rem; margin-top: 1em;">
         <div class="card-header">
             <ul class="nav nav-tabs card-header-tabs">
@@ -27,6 +22,11 @@
         </div>
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <form th:action="@{/connection}" method="post">
+                <div class="alert alert-success" th:if="${success}" th:text="${success}">
+                </div>
+
+                <div class="alert alert-danger" th:if="${error}" th:text="${error}">
+                </div>
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -50,6 +50,8 @@
         <div class="card-body">
             <div class="Transaction" id="transfer">
                 <form th:action="@{/transfer/new}" modelAttribute="newTransaction" method="post">
+                    <div class="alert alert-danger" th:if="${errorTransfer}" th:text="${errorTransfer}">
+                    </div>
                     <fieldset class="row mb-3">
                         <legend class="col-form-label col-sm-2 pt-0">Type</legend>
                         <div class="col-sm-10">

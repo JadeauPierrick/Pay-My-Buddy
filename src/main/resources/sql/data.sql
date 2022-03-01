@@ -30,18 +30,18 @@ VALUES
 INSERT INTO transaction (type, amount, fees, description, original_account_id, buddy_account_id)
 VALUES
 ('TRANSFER', 50, 0.25, 'Restaurant', 1, 2),
-('TRANSFER', 10, 0.05, 'Bus ticket', 1, 2),
-('TRANSFER', 80, 0.40, 'Plane ticket', 1, 2),
-('TRANSFER', 50, 0.25, 'Flowers', 1, 2),
-('TRANSFER', 50, 0.25, 'Movie tickets', 1, 2),
+('TRANSFER', 10, 0.05, 'Bus ticket', 1, 3),
+('TRANSFER', 80, 0.40, 'Plane ticket', 1, 4),
+('TRANSFER', 50, 0.25, 'Flowers', 1, 3),
+('TRANSFER', 50, 0.25, 'Movie tickets', 1, 4),
 ('TRANSFER', 50, 0.25, 'Gift Matt', 1, 2),
 ('TRANSFER', 50, 0.25, 'Gasoline', 1, 2),
-('TRANSFER', 50, 0.25, 'Gift Andrew', 1, 2),
-('TRANSFER', 50, 0.25, 'Gift Quade', 1, 2),
-('TRANSFER', 50, 0.25, 'Gift Finn', 1, 2),
+('TRANSFER', 50, 0.25, 'Gift Andrew', 1, 4),
+('TRANSFER', 50, 0.25, 'Gift Quade', 1, 4),
+('TRANSFER', 50, 0.25, 'Gift Finn', 1, 3),
 ('TRANSFER', 50, 0.25, 'Restaurant', 1, 2),
 ('TRANSFER', 50, 0.25, 'Rugby match', 1, 2),
-('TRANSFER', 50, 0.25, 'Phone', 1, 2),
-('TRANSFER', 50, 0.25, 'Trip money', 1, 2);
+('TRANSFER', 50, 0.25, 'Phone', 1, 4),
+('TRANSFER', 50, 0.25, 'Trip money', 1, 3);
 
 

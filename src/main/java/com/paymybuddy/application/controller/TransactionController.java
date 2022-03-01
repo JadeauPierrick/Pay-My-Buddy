@@ -7,6 +7,7 @@ import com.paymybuddy.application.model.User;
 import com.paymybuddy.application.service.AccountService;
 import com.paymybuddy.application.service.TransactionService;
 import com.paymybuddy.application.service.UserService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -18,12 +19,12 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
-import java.math.BigDecimal;
+
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+@Slf4j
 @Controller
 public class TransactionController {
 
@@ -48,6 +49,7 @@ public class TransactionController {
         model.addAttribute("transactions", transactions);
         model.addAttribute("currentPage", page);
         model.addAttribute("buddies", buddies);
+        log.info("Get transfer page of " + user.getFirstName() + " " + user.getLastName());
         return "transfer";
     }
 
@@ -61,12 +63,14 @@ public class TransactionController {
         if (transaction.getTransactionType().equals(TransactionType.TRANSFER)){
             try {
                 accountService.makeATransfer(user.getAccount(), buddy.getAccount(), transaction.getTransactionType(), transaction.getAmount(), transaction.getDescription());
+                log.info("New transfer between " + user.getFirstName() + " " + user.getLastName() + " and " + buddy.getFirstName() + " " + buddy.getLastName());
             }catch (Exception e){
                 model.addAttribute("errorTransfer", errorTransfer);
             }
         }else {
             try {
                 accountService.makeABankTransfer(user.getAccount(), transaction.getTransactionType(), transaction.getAmount(), transaction.getDescription());
+                log.info("New bank transfer " + transaction.getTransactionType() + " by " + user.getFirstName() + " " + user.getLastName());
             }catch (Exception e){
                 model.addAttribute("errorTransfer", errorTransfer);
             }
