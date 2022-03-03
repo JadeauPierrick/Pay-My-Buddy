@@ -85,6 +85,7 @@ public class AccountServiceImpl implements AccountService{
         transaction.setFees(fees);
         transaction.setDescription(description);
         transaction.setOriginalAccount(account);
+        transaction.setBuddyAccount(account);
         transactionRepository.save(transaction);
     }
 

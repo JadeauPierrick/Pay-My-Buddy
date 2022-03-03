@@ -2,10 +2,9 @@ package com.paymybuddy.application.controller;
 
 import com.paymybuddy.application.model.Connection;
 import com.paymybuddy.application.model.User;
-import com.paymybuddy.application.service.ConnectionServiceImpl;
+import com.paymybuddy.application.service.ConnectionService;
 import com.paymybuddy.application.service.UserService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,11 +17,14 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 public class ConnectionController {
 
-    @Autowired
-    private ConnectionServiceImpl connectionService;
+    private ConnectionService connectionService;
 
-    @Autowired
     private UserService userService;
+
+    public ConnectionController(ConnectionService connectionService, UserService userService) {
+        this.connectionService = connectionService;
+        this.userService = userService;
+    }
 
     @RequestMapping(value = "/connection", method = RequestMethod.POST)
     public String addConnection(Authentication authentication, HttpServletRequest request, Model model) throws Exception {

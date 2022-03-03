@@ -8,7 +8,6 @@ import com.paymybuddy.application.service.AccountService;
 import com.paymybuddy.application.service.TransactionService;
 import com.paymybuddy.application.service.UserService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -28,14 +27,17 @@ import java.util.stream.IntStream;
 @Controller
 public class TransactionController {
 
-    @Autowired
     private UserService userService;
 
-    @Autowired
     private TransactionService transactionService;
 
-    @Autowired
     private AccountService accountService;
+
+    public TransactionController(UserService userService, TransactionService transactionService, AccountService accountService) {
+        this.userService = userService;
+        this.transactionService = transactionService;
+        this.accountService = accountService;
+    }
 
     @GetMapping(value = "/transfer")
     public String transferPage(Authentication authentication, @RequestParam(name = "page", defaultValue = "0") int page, @RequestParam(name="size", defaultValue = "4") int size, Model model) throws Exception {
@@ -57,11 +59,11 @@ public class TransactionController {
     public String newTransfer(@ModelAttribute("newTransaction") Transaction transaction, BindingResult result, HttpServletRequest request, Authentication authentication, Model model) throws Exception {
 
         User user = userService.getUserByEmail(authentication.getName());
-        User buddy = userService.getUserByEmail(request.getParameter("buddyAccount"));
         String errorTransfer = "Your balance is not enough";
 
         if (transaction.getTransactionType().equals(TransactionType.TRANSFER)){
             try {
+                User buddy = userService.getUserByEmail(request.getParameter("buddyAccount"));
                 accountService.makeATransfer(user.getAccount(), buddy.getAccount(), transaction.getTransactionType(), transaction.getAmount(), transaction.getDescription());
                 log.info("New transfer between " + user.getFirstName() + " " + user.getLastName() + " and " + buddy.getFirstName() + " " + buddy.getLastName());
             }catch (Exception e){
